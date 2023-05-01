@@ -4,7 +4,7 @@ on:
   repository_dispatch:
     types: [on-demand-test]
 env:
-    issue: ${issue}
+    issue: ${{issue}}
 
 
 jobs:
