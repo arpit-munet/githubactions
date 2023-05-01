@@ -11,3 +11,6 @@ jobs:
     steps:
       - name: Run Test Case
         run: echo 'Chal gaya'
+        
+      - name: Fetch API Data 📦
+        uses: JamesIves/fetch-api-data-action@v2
