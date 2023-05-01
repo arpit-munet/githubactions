@@ -3,7 +3,8 @@ name: Repo Dispatch
 on:
   repository_dispatch:
     types: [on-demand-test]
-    issue: [issue]
+env:
+    issue: ${issue}
 
 
 jobs:
