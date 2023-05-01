@@ -3,6 +3,7 @@ name: Repo Dispatch
 on:
   repository_dispatch:
     types: [on-demand-test]
+    issue: [issue]
 
 
 jobs:
@@ -11,6 +12,3 @@ jobs:
     steps:
       - name: Run Test Case
         run: echo 'Chal gaya'
-        
-      - name: Fetch API Data 📦
-        uses: JamesIves/fetch-api-data-action@v2
