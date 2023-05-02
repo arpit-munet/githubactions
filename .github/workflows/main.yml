@@ -9,4 +9,4 @@ jobs:
     steps:
       - name: Run Test Case
         run: echo 'Chal gaya'
-         issueid= ${{ github.event.issue}}
+         issueid= ${{ github.event.client_payload.issue}}
