@@ -10,3 +10,5 @@ jobs:
       - name: Run Test Case
         run: echo 'Chal gaya'
          issueid= ${{ github.event.client_payload.issue}}
+         issue_status= ${{ github.event.client_payload.status}}
+         issue_summ= ${{ github.event.client_payload.summ}}
