@@ -1,0 +1,36 @@
+name: Charm Document
+
+on:
+  repository_dispatch:
+    types: [charm-doc-creation]
+jobs:
+  agent:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Jira field value
+        run: echo 'its running'
+         ricefw_id= ${{ github.event.client_payload.issue}}
+         ricefw_assignee= ${{ github.event.client_payload.assignee}}
+         ricefw_summ= ${{ github.event.client_payload.summ}}
+         ricefw_phasecycle= ${{ github.event.client_payload.phasecycle}}
+         ricefw_desc= ${{ github.event.client_payload.desc}}
+         ricefw_parent_id=
+         ricefw_tech_area=
+         
+      - name: Create csrf Token
+        id: requesttoken
+        run: |
+           "token=$(curl --request GET --url "https://980934bbtrial.authentication.us10.hana.ondemand.com/oauth/token?grant_type=client_credentials" --user "${{ secrets.CLIENTID }}:${{ secrets.CLIENTSECRET }}" --header 'content-type: application/json' -c cookies.txt -b cookies.txt)"  >> $GITHUB_OUTPUT
+        
+      - name: Check on success
+        if: steps.requesttoken.outcome == 'success' 
+        run: 
+         echo ${{steps.requesttoken.outputs.token}}
+         
+      - name: Check on failures
+        if: steps.requesttoken.outcome != 'success' 
+        run: |
+           curl -X PUT 'https://githubaction.atlassian.net/rest/api/2/issue/${{ricefw_id}}' -H 'Accept: application/json' -H 'Content-Type: application/json' -d "{"update": {"comment": [{\"add\": {\"body\": \"token generation failed\"}}]},\"fields\": {"status}" --user "shivamrajput1710@gmail.com:ATATT3xFfGF0hU1nV97eeRsQ4eWu1RAAa5AjaA2Ef9tcgRosdq27WzWRyVyc5y84nLXZZbY_0pa7NXtXwdQK4nUepkxM1fPUU5yujtLgxeWWY3VMWh_mkhcHvJKkUIK8RChoskMI9Ik_CRsyR_oHo-dHMjah8vPbQwq8dxTxA3QJRBEMaws2PZc=D78C6768
+       
+         
+          
